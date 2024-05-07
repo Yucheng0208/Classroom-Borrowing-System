@@ -228,7 +228,9 @@
 </head>
 <body>
     <header>
-        <h1>教室借用系統</h1>
+        <h1>資網系教室借用系統</h1>
+        <h3>Department of Computer Information and Network Engineering & Master Ptogram</h3>
+        <h3>Classroom Borrowing Systems</h3>
         <!--<img src="F:\LOGO\LOGO.png" alt="Logo">-->
     </header>
         
@@ -273,7 +275,7 @@
                 document.getElementById('dateborrow').max = new Date().toISOString().split('T')[0];
             </script>
             <br><br>
-            <label for="password">密碼：</label>
+            <!--<label for="password">密碼：</label>-->
             <input type="password" id="password" name="password"><br><br>
             <input type="button" value="提交" onclick="submitForm()">
             <input type="button" value="下載清單" onclick="downloadCSV('utf-8')">
