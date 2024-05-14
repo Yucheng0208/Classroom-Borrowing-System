@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>資網系-教室借用系統</title>
+    <link rel="icon" href="LOGO.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff;
+            color: #333;
+        }
+
+        .container {
+            flex: 1;
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        header, footer {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        form, .table-container {
+            background-color: #e7f1ff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        input, select, button {
+            padding: 10px;
+            border-radius: 15px;
+            box-sizing: border-box;
+        }
+
+        input {
+            width: 150px;
+        }
+
+        .spacer {
+            width: 20px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .danger-button {
+            background-color: #dc3545;
+        }
+
+        .table-container {
+            margin-top: 20px;
+        }
+
+        .row, .table-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            border-radius: 15px;
+            margin-top: 5px;
+        }
+
+        .cell {
+            flex: 1;
+            text-align: center;
+        }
+
+        .delete-button {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+
+        .open-excel-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Classroom Borrowing System</h1>
+        <div>
+            <label for="languageSelect">選擇語言：</label>
+            <select id="languageSelect" onchange="changeLanguage()">
+                <option value="#">預設語言</option>
+                <option value="Chinese.html">中文</option>
+                <option value="English.html">English</option>
+                <option value="Vietnamese.html">Tiếng Việt</option>
+            </select>
+        </div>
+    </header>
+
+    <div class="container">
+        <form id="dataForm">
+            <div class="form-row">
+                <div class="inline-input">
+                    <label class="inline-label" for="id">Student/Staff ID:</label>
+                    <input class="input-field" type="text" id="id" name="id">
+                </div>
+                <div class="spacer"></div>
+
+                <div class="inline-input">
+                    <label class="inline-label" for="name">Borrower's Name:</label>
+                    <input class="input-field" type="text" id="name" name="name">
+                </div>
+                <div class="spacer"></div>
+
+                <div class="inline-input">
+                    <label class="inline-label" for="classroom">Classroom:</label>
+                    <select id="classroom" name="classroom" class="input-field">
+                        <option value="F308">F308</option>
+                        <option value="F309">F309</option>
+                        <option value="F312A">F312A</option>
+                        <option value="F313">F313</option>
+                        <option value="F314">F314</option>
+                        <option value="S214">S214</option>
+                        <option value="S502">S502</option>
+                        <option value="S503">S503</option>
+                    </select>
+                </div>
+                <div class="spacer"></div>
+
+                <div class="inline-input">
+                    <label class="inline-label" for="time">Class Period:</label>
+                    <select id="time" name="time" class="input-field">
+                        <option value="第一堂　08:10-09:00">First Period 08:10 - 09:00</option>
+                        <option value="第二堂　09:10-10:00">Second Period 09:10 - 10:00</option>
+                        <option value="第三堂　10:10-11:00">Third Period 10:10 - 11:00</option>
+                        <option value="第四堂　11:10-12:00">Fourth Period 11:10 - 12:00</option>
+                        <option value="第五堂　12:05-12:55">Fifth Period 12:05 - 12:55</option>
+                        <option value="第六堂　13:00-13:50">Sixth Period 13:00 - 13:50</option>
+                        <option value="第七堂　13:55-14:45">Seventh Period 13:55 - 14:45</option>
+                        <option value="第八堂　14:55-15:45">Eighth Period 14:55 - 15:45</option>
+                        <option value="第九堂　15:50-16:40">Ninth Period 15:50 - 16:40</option>
+                        <option value="第Ａ堂　16:45-17:35">Tenth Period 16:45 - 17:35</option>
+                        <option value="第Ｂ堂　18:30-19:15">Eleventh Period 18:30 - 19:15</option>
+                        <option value="第Ｃ堂　19:15-20:00">Twelfth Period 19:15 - 20:00</option>
+                        <option value="第Ｄ堂　20:10-20:55">Thirteenth Period 20:10 - 20:55</option>
+                        <option value="第Ｅ堂　20:55-21:40">Fourteenth Period 20:55 - 21:40</option>
+                    </select>
+                </div>
+            </div>
+            <div class="button-container">
+                <button type="button" onclick="submitForm()">Submit</button>
+                <button type="button" onclick="resetForm()" class="danger-button">Reset</button>
+            </div>
+        </form>
+
+        <div class="table-container">
+            <div class="table-header">
+                <div class="cell">No.</div>
+                <div class="cell">Student/Staff ID</div>
+                <div class="cell">Name</div>
+                <div class="cell">Classroom</div>
+                <div class="cell">Timestamp</div>
+                <div class="cell">Action</div>
+            </div>
+            <div id="dataDisplay"></div>
+        </div>
+
+        <div class="button-container">
+            <button class="open-excel-button" onclick="exportToExcel()">Export to Excel</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>版權所有 &copy; <span id="currentYear"></span> 資訊網路工程系暨研究所</p>
+        <p>Copyright &copy; <span id="currentYear_en"></span> Computer Information and Network Engineering & Master Program</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+    <script>
+        var data = JSON.parse(localStorage.getItem('savedData')) || [];
+
+        function submitForm() {
+            var id = document.getElementById("id").value;
+            var name = document.getElementById("name").value;
+            var classroom = document.getElementById("classroom").value;
+            var time = document.getElementById("time").value;
+            var timestamp = new Date().toLocaleString();
+
+            if (!id || !name) {
+                alert("Please enter Student/Staff ID and name.");
+                return;
+            }
+
+            var newData = { id: id, name: name, classroom: classroom, time: time, timestamp: timestamp };
+            data.push(newData);
+
+            addRowToDisplay(newData);
+
+            localStorage.setItem("savedData", JSON.stringify(data));
+        }
+
+        function addRowToDisplay(rowData) {
+            var newRow = document.createElement("div");
+            newRow.className = 'row';
+            newRow.innerHTML = `
+                <div class="cell"></div>
+                <div class="cell">${rowData.id}</div>
+                <div class="cell">${rowData.name}</div>
+                <div class="cell">${rowData.classroom}</div>
+                <div class="cell">${rowData.timestamp}</div>
+                <div class="cell">
+                    <button class="delete-button" onclick="removeRow(this)">Delete</button>
+                </div>
+            `;
+            document.getElementById("dataDisplay").appendChild(newRow);
+            updateSerialNumbers();
+        }
+
+        function removeRow(button) {
+            var rowToDelete = button.parentElement.parentElement;
+            var rowIndex = Array.from(document.getElementById('dataDisplay').children).indexOf(rowToDelete);
+            data.splice(rowIndex, 1);
+            rowToDelete.remove();
+            updateSerialNumbers();
+            localStorage.setItem('savedData', JSON.stringify(data));
+        }
+
+        function resetForm() {
+            var form = document.getElementById('dataForm');
+            form.reset();
+        }
+
+        function updateSerialNumbers() {
+            const rows = document.querySelectorAll('#dataDisplay .row');
+            rows.forEach((row, index) => {
+                row.children[0].textContent = index + 1;
+            });
+        }
+
+        function exportToExcel() {
+            var password = prompt("Please enter the password to export Excel:");
+            if (password !== "lhucin5701lhucin5701") {
+                alert("Incorrect password, unable to export Excel.");
+                return;
+            }
+
+            var worksheet = XLSX.utils.json_to_sheet([
+                { A: '學號/職編', B: '姓名', C: '借用教室', D: '上課時段', E: '時間戳記' }
+            ], { header: ["A", "B", "C", "D", "E"], skipHeader: true });
+
+            XLSX.utils.sheet_add_json(worksheet, data, { skipHeader: true, origin: "A2" });
+
+            var workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Borrowing Data");
+
+            var now = new Date();
+            var timestamp = now.getFullYear() + "-" +
+                            ("0" + (now.getMonth() + 1)).slice(-2) + "-" +
+                            ("0" + now.getDate()).slice(-2) + "_" +
+                            ("0" + now.getHours()).slice(-2) + "-" +
+                            ("0" + now.getMinutes()).slice(-2) + "-" +
+                            ("0" + now.getSeconds()).slice(-2);
+
+            var filename = "教室借用資料_" + timestamp + ".xlsx";
+            XLSX.writeFile(workbook, filename);
+        }
+
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        document.getElementById('currentYear_en').textContent = new Date().getFullYear();
+        
+        // Add countdown timer and activity detection
+        var countdown = 10; // countdown time in seconds
+        var timer;
+
+        function resetTimer() {
+            clearTimeout(timer);
+            countdown = 10;
+            timer = setTimeout(redirectToChinese, countdown * 1000);
+        }
+
+        function redirectToChinese() {
+            window.location.href = "Chinese.html";
+        }
+
+        // Reset timer on any user interaction
+        document.addEventListener('mousemove', resetTimer);
+        document.addEventListener('keydown', resetTimer);
+        document.addEventListener('mousedown', resetTimer);
+        document.addEventListener('touchstart', resetTimer);
+
+        // Start the timer when the page loads
+        window.onload = resetTimer;
+        
+        // Language selection function
+        function changeLanguage() {
+            var languageSelect = document.getElementById('languageSelect');
+            var selectedLanguage = languageSelect.value;
+            window.location.href = selectedLanguage;
+        }
+    </script>
+</body>
+</html>
