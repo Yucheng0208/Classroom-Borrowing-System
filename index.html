@@ -186,7 +186,7 @@
             <div class="table-header">
                 <div class="cell">序號</div>
                 <div class="cell">學號/職編</div>
-                <div class="cell">姓名</div>
+                <div class="cell">借用人姓名</div>
                 <div class="cell">借用教室</div>
                 <div class="cell">時間戳記</div>
                 <div class="cell">操作</div>
@@ -203,6 +203,10 @@
         <p>版權所有 &copy; <span id="currentYear"></span> 資訊網路工程系暨研究所</p>
         <p>Copyright &copy; <span id="currentYear_en"></span> Computer Information and Network Engineering & Master Program</p>
     </footer>
+
+    <button id="scrollToTop" onclick="scrollToTop()" style="position: fixed; bottom: 60px; right: 20px; display: none;">TOP</button>
+    <button id="scrollToBottom" onclick="scrollToBottom()" style="position: fixed; bottom: 20px; right: 20px;">DOWN</button>
+    
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
     <script>
@@ -285,7 +289,7 @@
             }
 
             var worksheet = XLSX.utils.json_to_sheet([
-                { A: '學號/職編', B: '姓名', C: '借用教室', D: '上課時段', E: '時間戳記' }
+                { A: '學號/職編', B: '借用人姓名', C: '借用教室', D: '上課時段', E: '時間戳記' }
             ], { header: ["A", "B", "C", "D", "E"], skipHeader: true });
 
             XLSX.utils.sheet_add_json(worksheet, data, { skipHeader: true, origin: "A2" });
@@ -303,6 +307,11 @@
 
             var filename = "教室借用資料_" + timestamp + ".xlsx";
             XLSX.writeFile(workbook, filename);
+
+            // 清空儲存的資料
+            data = [];
+            localStorage.removeItem('savedData');
+            document.getElementById('dataDisplay').innerHTML = '';
         }
 
         document.getElementById('currentYear').textContent = new Date().getFullYear();
@@ -355,6 +364,25 @@
         updateTime();
         setInterval(updateTime, 1000);
 
+        // Scroll to top function
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Scroll to bottom function
+        function scrollToBottom() {
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+
+        // Show or hide the "TOP" button based on scroll position
+        window.onscroll = function() {
+            var scrollToTopButton = document.getElementById('scrollToTop');
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollToTopButton.style.display = 'block';
+            } else {
+                scrollToTopButton.style.display = 'none';
+            }
+        };
     </script>
 </body>
 </html>
