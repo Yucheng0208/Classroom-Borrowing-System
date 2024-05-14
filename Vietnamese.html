@@ -117,6 +117,7 @@
 <body>
     <header>
         <h1>Hệ thống mượn phòng học</h1>
+        <div id="currentTime" style="margin: 10px; font-size: 16px;"></div>
         <div>
             <label for="languageSelect">選擇語言：</label>
             <select id="languageSelect" onchange="changeLanguage()">
@@ -328,6 +329,22 @@
             var selectedLanguage = languageSelect.value;
             window.location.href = selectedLanguage;
         }
+
+        // Current Time
+        function updateTime() {
+            var now = new Date();
+            var formattedTime = now.getFullYear() + '-' +
+                        ('0' + (now.getMonth() + 1)).slice(-2) + '-' +
+                        ('0' + now.getDate()).slice(-2) + ' ' +
+                        ('0' + now.getHours()).slice(-2) + ':' +
+                        ('0' + now.getMinutes()).slice(-2) + ':' +
+                        ('0' + now.getSeconds()).slice(-2);
+            document.getElementById('currentTime').textContent = 'Thời gian hiện tại: ' + formattedTime;
+        }
+
+        // 初始更新一次時間，然後每秒更新一次
+        updateTime();
+        setInterval(updateTime, 1000);
     </script>
 </body>
 </html>
