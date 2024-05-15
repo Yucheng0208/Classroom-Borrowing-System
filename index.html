@@ -42,6 +42,7 @@
 
         .form-row {
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
             margin-bottom: 10px;
         }
@@ -50,14 +51,12 @@
             padding: 10px;
             border-radius: 15px;
             box-sizing: border-box;
-        }
-
-        input {
-            width: 150px;
+            margin-bottom: 10px;
+            width: 100%;
         }
 
         .spacer {
-            width: 20px;
+            width: 100%;
         }
 
         button {
@@ -66,6 +65,7 @@
             border: none;
             cursor: pointer;
             transition: background-color 0.3s;
+            width: auto;
         }
 
         button:hover {
@@ -78,11 +78,12 @@
 
         .table-container {
             margin-top: 20px;
+            overflow-x: auto;
         }
 
         .row, .table-header {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             padding: 10px;
             border-radius: 15px;
@@ -92,6 +93,8 @@
         .cell {
             flex: 1;
             text-align: center;
+            min-width: 120px;
+            font-size: 12px;
         }
 
         .delete-button {
@@ -112,6 +115,29 @@
             transition: background-color 0.3s;
             margin-top: 20px;
         }
+
+        @media (min-width: 600px) {
+            input, select {
+                width: 150px;
+            }
+
+            .form-row {
+                flex-wrap: nowrap;
+            }
+
+            .spacer {
+                width: 20px;
+            }
+        }
+
+        #languageSelect {
+            width: auto;
+            padding: 5px;
+        }
+
+        #id, #name {
+            width: 200px; /* 設定學號/職編和姓名欄位的寬度相同 */
+        }
     </style>
 </head>
 <body>
@@ -126,7 +152,7 @@
                 <option value="English.html">English</option>
                 <option value="Vietnamese.html">Tiếng Việt</option>
             </select>
-        </div>     
+        </div>
     </header>
 
     <div class="container">
@@ -206,7 +232,6 @@
 
     <button id="scrollToTop" onclick="scrollToTop()" style="position: fixed; bottom: 60px; right: 20px; display: none;">TOP</button>
     <button id="scrollToBottom" onclick="scrollToBottom()" style="position: fixed; bottom: 20px; right: 20px;">DOWN</button>
-    
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
     <script>
@@ -236,9 +261,9 @@
 
             var newData = { id: id, name: name, classroom: classroom, time: time, timestamp: timestamp };
             data.push(newData);
-        
+
             addRowToDisplay(newData);
-        
+
             // Save updated data to local storage
             localStorage.setItem("savedData", JSON.stringify(data));
         }
@@ -316,7 +341,7 @@
 
         document.getElementById('currentYear').textContent = new Date().getFullYear();
         document.getElementById('currentYear_en').textContent = new Date().getFullYear();
-        
+
         // Add countdown timer and activity detection
         var countdown = 10; // countdown time in seconds
         var timer;
@@ -340,7 +365,6 @@
         // Start the timer when the page loads
         window.onload = resetTimer;
 
-        
         // Language selection function
         function changeLanguage() {
             var languageSelect = document.getElementById('languageSelect');

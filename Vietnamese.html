@@ -42,6 +42,7 @@
 
         .form-row {
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
             margin-bottom: 10px;
         }
@@ -50,14 +51,12 @@
             padding: 10px;
             border-radius: 15px;
             box-sizing: border-box;
-        }
-
-        input {
-            width: 150px;
+            margin-bottom: 10px;
+            width: 100%;
         }
 
         .spacer {
-            width: 20px;
+            width: 100%;
         }
 
         button {
@@ -66,6 +65,7 @@
             border: none;
             cursor: pointer;
             transition: background-color 0.3s;
+            width: auto;
         }
 
         button:hover {
@@ -78,11 +78,12 @@
 
         .table-container {
             margin-top: 20px;
+            overflow-x: auto;
         }
 
         .row, .table-header {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             padding: 10px;
             border-radius: 15px;
@@ -92,6 +93,8 @@
         .cell {
             flex: 1;
             text-align: center;
+            min-width: 120px;
+            font-size: 12px;
         }
 
         .delete-button {
@@ -111,6 +114,29 @@
             cursor: pointer;
             transition: background-color 0.3s;
             margin-top: 20px;
+        }
+
+        @media (min-width: 600px) {
+            input, select {
+                width: 150px;
+            }
+
+            .form-row {
+                flex-wrap: nowrap;
+            }
+
+            .spacer {
+                width: 20px;
+            }
+        }
+
+        #languageSelect {
+            width: auto;
+            padding: 5px;
+        }
+
+        #id, #name {
+            width: 200px; /* 設定學號/職編和姓名欄位的寬度相同 */
         }
     </style>
 </head>
